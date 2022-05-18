@@ -84,6 +84,14 @@ def generate_launch_description():
         output='screen'
     )
 
+    # Declare node actions
+    robot_controller_gazebo = Node(
+        package='notspot_controller',
+        executable='robot_controller_gazebo',
+        name='robot_controller_gazebo',
+        output='screen',
+        parameters=[])
+
     return LaunchDescription([
         declare_use_sim_time,
         robot_state_publisher,
@@ -91,4 +99,5 @@ def generate_launch_description():
         spawn_entity_to_gazebo,
         load_joint_state_controller,
         load_joint_trajectory_controller,
+        robot_controller_gazebo
     ])

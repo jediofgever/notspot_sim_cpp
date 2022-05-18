@@ -13,9 +13,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from imrt_virtual_joy.joystick import Joystick
 import rclpy
 import rclpy.qos
+import rclpy.time
 from sensor_msgs.msg import Joy
 import imrt_virtual_joy.resources
 import sys
+import numpy as np
 
 
 class GamePad(QtWidgets.QMainWindow):
@@ -117,9 +119,9 @@ class GamePad(QtWidgets.QMainWindow):
 
         # Royfy
         rclpy.init(args=None)
-        node = rclpy.create_node('virtual_gamepad')
-        node.get_logger().info('Virtual gamepad started')
-        self.joy_publisher = node.create_publisher(
+        self.node = rclpy.create_node('virtual_gamepad')
+        self.node.get_logger().info('Virtual gamepad started')
+        self.joy_publisher = self.node.create_publisher(
             Joy, 'joy', qos_profile=rclpy.qos.qos_profile_sensor_data)
 
         # Show window
@@ -163,9 +165,12 @@ class GamePad(QtWidgets.QMainWindow):
 
     def _output_data(self):
         joy_msg = Joy()
-        joy_msg.axes = self._axes
-        joy_msg.buttons = self._buttons
 
+        arr = np.array(self._axes)
+        arr = arr * 0.2
+        joy_msg.axes = arr.tolist()
+        joy_msg.buttons = self._buttons
+        joy_msg.header.stamp = self.node.get_clock().now().to_msg()
         self.joy_publisher.publish(joy_msg)
 
         sys.stdout.flush()

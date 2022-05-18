@@ -21,16 +21,23 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
+    use_sim_time = LaunchConfiguration('use_sim_time')
+    declare_use_sim_time = DeclareLaunchArgument(
+        'use_sim_time',
+        default_value='True',
+        description='whether to use or not sim time.')
+
     # Declare node actions
     imrt_virtual_joy = Node(
         package='imrt_virtual_joy',
         executable='imrt_virtual_joy',
-        name='imrt_virtual_joy_rclpy_node',
+        name='imrt_virtual_joy',
         output='screen',
-        parameters=[])
+        parameters=[{"use_sim_time": use_sim_time}])
 
     # Create the launch description and populate
     ld = LaunchDescription()
+    ld.add_action(declare_use_sim_time)
     ld.add_action(imrt_virtual_joy)
 
     return ld

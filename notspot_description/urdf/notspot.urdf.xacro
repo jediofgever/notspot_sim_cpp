@@ -321,7 +321,7 @@
     <child link="FR1" />
     <axis xyz="0 0 1" />
     <limit lower="-3" upper="3" effort="${effort_limit}" velocity="3" />
-    <dynamics damping="0.7" friction="10.0" />
+    <dynamics damping="10.0" friction="1000.0" />
 
   </joint>
 
@@ -332,7 +332,7 @@
     <child link="FR2" />
     <axis xyz="0 0 1" />
     <limit lower="-3" upper="3" effort="${effort_limit}" velocity="3" />
-    <dynamics damping="0.7" friction="10.0" />
+    <dynamics damping="10.0" friction="1000.0" />
 
   </joint>
 
@@ -342,7 +342,7 @@
     <child link="FR3" />
     <axis xyz="0 0 1" />
     <limit lower="-3" upper="3" effort="${effort_limit}" velocity="3" />
-    <dynamics damping="0.7" friction="10.0" />
+    <dynamics damping="10.0" friction="1000.0" />
 
   </joint>
 
@@ -359,7 +359,7 @@
     <child link="FL1" />
     <axis xyz="0 0 1" />
     <limit lower="-3" upper="3" effort="${effort_limit}" velocity="3" />
-    <dynamics damping="0.7" friction="10.0" />
+    <dynamics damping="10.0" friction="1000.0" />
 
   </joint>
 
@@ -370,7 +370,7 @@
     <axis xyz="0 0 1" />
     <limit lower="-3" upper="3" effort="${effort_limit}" velocity="3" />
 
-    <dynamics damping="0.7" friction="10.0" />
+    <dynamics damping="10.0" friction="1000.0" />
 
   </joint>
 
@@ -380,7 +380,7 @@
     <child link="FL3" />
     <axis xyz="0 0 1" />
     <limit lower="-3" upper="3" effort="${effort_limit}" velocity="3" />
-    <dynamics damping="0.7" friction="10.0" />
+    <dynamics damping="10.0" friction="1000.0" />
 
   </joint>
 
@@ -397,7 +397,7 @@
     <child link="RR1" />
     <axis xyz="0 0 1" />
     <limit lower="-3" upper="3" effort="${effort_limit}" velocity="3" />
-    <dynamics damping="0.7" friction="10.0" />
+    <dynamics damping="10.0" friction="1000.0" />
 
   </joint>
 
@@ -407,7 +407,7 @@
     <child link="RR2" />
     <axis xyz="0 0 1" />
     <limit lower="-3" upper="3" effort="${effort_limit}" velocity="3" />
-    <dynamics damping="0.7" friction="10.0" />
+    <dynamics damping="10.0" friction="1000.0" />
 
   </joint>
 
@@ -417,7 +417,7 @@
     <child link="RR3" />
     <axis xyz="0 0 1" />
     <limit lower="-3" upper="3" effort="${effort_limit}" velocity="3" />
-    <dynamics damping="0.7" friction="10.0" />
+    <dynamics damping="10.0" friction="1000.0" />
   </joint>
 
   <joint name="RR4_joint" type="fixed">
@@ -433,7 +433,7 @@
     <child link="RL1" />
     <axis xyz="0 0 1" />
     <limit lower="-3" upper="3" effort="${effort_limit}" velocity="3" />
-    <dynamics damping="0.7" friction="10.0" />
+    <dynamics damping="10.0" friction="1000.0" />
 
   </joint>
 
@@ -443,7 +443,7 @@
     <child link="RL2" />
     <axis xyz="0 0 1" />
     <limit lower="-3" upper="3" effort="${effort_limit}" velocity="3" />
-    <dynamics damping="0.7" friction="10.0" />
+    <dynamics damping="10.0" friction="1000.0" />
 
   </joint>
 
@@ -453,7 +453,7 @@
     <child link="RL3" />
     <axis xyz="0 0 1" />
     <limit lower="-3" upper="3" effort="${effort_limit}" velocity="3" />
-    <dynamics damping="0.7" friction="10.0" />
+    <dynamics damping="10.0" friction="1000.0" />
 
   </joint>
 
@@ -737,38 +737,94 @@
 
   <!-- FR4 friction -->
   <gazebo reference="FR4">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-    <minDepth>0.0002</minDepth>
-    <kp value="1000000.0" />
-    <kd value="100.0" />
+    <collision>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>100</mu2>
+            <slip1>0.0</slip1>
+            <slip2>0.0</slip2>
+          </ode>
+        </friction>
+        <contact>
+          <ode>
+            <kp>1000000.0</kp>
+            <kd>100.0</kd>
+            <min_depth>0.001</min_depth>
+          </ode>
+        </contact>
+      </surface>
+    </collision>
   </gazebo>
 
   <!-- FL4 friction -->
   <gazebo reference="FL4">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-    <minDepth>0.0002</minDepth>
-    <kp value="1000000.0" />
-    <kd value="100.0" />
+    <collision>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>100</mu2>
+            <slip1>0.0</slip1>
+            <slip2>0.0</slip2>
+          </ode>
+        </friction>
+        <contact>
+          <ode>
+            <kp>1000000.0</kp>
+            <kd>100.0</kd>
+            <min_depth>0.001</min_depth>
+          </ode>
+        </contact>
+      </surface>
+    </collision>
   </gazebo>
 
   <!-- RR4 friction -->
   <gazebo reference="RR4">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-    <minDepth>0.0002</minDepth>
-    <kp value="1000000.0" />
-    <kd value="100.0" />
+    <collision>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>100</mu2>
+            <slip1>0.0</slip1>
+            <slip2>0.0</slip2>
+          </ode>
+        </friction>
+        <contact>
+          <ode>
+            <kp>1000000.0</kp>
+            <kd>100.0</kd>
+            <min_depth>0.001</min_depth>
+          </ode>
+        </contact>
+      </surface>
+    </collision>
   </gazebo>
 
   <!-- RL4 friction -->
   <gazebo reference="RL4">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-    <minDepth>0.0002</minDepth>
-    <kp value="1000000.0" />
-    <kd value="100.0" />
+    <collision>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>100</mu2>
+            <slip1>100.1</slip1>
+            <slip2>100.1</slip2>
+          </ode>
+        </friction>
+        <contact>
+          <ode>
+            <kp>1000000.0</kp>
+            <kd>100.0</kd>
+            <min_depth>0.001</min_depth>
+          </ode>
+        </contact>
+      </surface>
+    </collision>
   </gazebo>
 
 </robot>

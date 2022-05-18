@@ -27,8 +27,8 @@ class IMRTTeleop(Node):
         self.create_subscription(
             Joy, 'joy',  self.joy_callback, rclpy.qos.qos_profile_sensor_data)
 
-        self._vx_gain = 0.7
-        self._wz_gain = 0.9
+        self._vx_gain = 0.2
+        self._wz_gain = 0.2
 
     def joy_callback(self, joy_msg):
         vx = joy_msg.axes[0] * self._vx_gain
