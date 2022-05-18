@@ -1,25 +1,28 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.5)
 project(notspot_controller)
 
-## Find ROS related packages/libraries
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  std_msgs
-  sensor_msgs
-)
+# Default to C++17
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+endif()
+
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(tf2 REQUIRED)
 
 ## Find other packages/libraries
 find_package(Eigen3 REQUIRED)
 
-catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES notspot_controller
-  CATKIN_DEPENDS roscpp
-)
+include_directories(include)
 
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-  include
+set(dependencies
+rclcpp
+std_msgs
+sensor_msgs
+tf2
+Eigen3
 )
 
 add_executable(robot_controller_gazebo 
@@ -35,4 +38,23 @@ add_executable(robot_controller_gazebo
     src/RobotController/StandController.cpp
     )
 
-target_link_libraries(robot_controller_gazebo Eigen3::Eigen ${catkin_LIBRARIES})
+ament_target_dependencies(robot_controller_gazebo ${dependencies})
+
+install(TARGETS robot_controller_gazebo
+        RUNTIME DESTINATION lib/${PROJECT_NAME})
+
+install(DIRECTORY include/
+        DESTINATION include/)
+
+install(
+  DIRECTORY 
+  DESTINATION share/${PROJECT_NAME})
+
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
+ament_export_include_directories(include)
+
+ament_package()

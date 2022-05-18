@@ -4,7 +4,7 @@
  */
 
 #pragma once
-#include <Eigen/Core>
+#include <eigen3/Eigen/Core>
 
 #define PI 3.1415926535897
 
@@ -24,8 +24,9 @@ Eigen::Matrix3f rotxyz(float alpha, float beta, float gamma);
 Eigen::Matrix4f homog_transxyz(float dx, float dy, float dz);
 
 // 4x4 general transformation matrix
-Eigen::Matrix4f homog_transform(float dx, float dy, float dz, 
-        float alpha, float beta, float gamma);
+Eigen::Matrix4f homog_transform(
+  float dx, float dy, float dz,
+  float alpha, float beta, float gamma);
 
 // Inverse of a general 4x4 transformation matrix
 Eigen::Matrix4f homog_transform_inverse(Eigen::Matrix4f matrix);

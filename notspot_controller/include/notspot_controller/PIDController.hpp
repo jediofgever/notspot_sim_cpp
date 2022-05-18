@@ -4,47 +4,47 @@
  */
 
 #pragma once
-#include <Eigen/Core>
-#include <ros/ros.h>
+#include <eigen3/Eigen/Core>
+#include <rclcpp/rclcpp.hpp>
 
 class PIDController
 {
-    public:
-        // PIDController class constructor - p, i and d values
-        PIDController(float p, float i, float d);
+public:
+  // PIDController class constructor - p, i and d values
+  PIDController(float p, float i, float d);
 
-		// Set desired roll and pitch angles
-        void set_desired_RP_angles(float des_roll, float des_pitch);
+  // Set desired roll and pitch angles
+  void set_desired_RP_angles(float des_roll, float des_pitch);
 
-		// Reset PID controller
-        void reset();
+  // Reset PID controller
+  void reset();
 
-		// Run 
-        Eigen::Vector2f run(float roll, float pitch);
+  // Run
+  Eigen::Vector2f run(float roll, float pitch);
 
-    private:
-		// p value
-        float kp;
+private:
+  // p value
+  float kp;
 
-		// i value
-        float ki;
+  // i value
+  float ki;
 
-		// d value
-        float kd;
+  // d value
+  float kd;
 
 
-		// desired roll and pitch angles
-        Eigen::Vector2f desired_roll_pitch;
+  // desired roll and pitch angles
+  Eigen::Vector2f desired_roll_pitch;
 
-		// accumulated I term
-        Eigen::Vector2f I_term;
+  // accumulated I term
+  Eigen::Vector2f I_term;
 
-		// last error
-        Eigen::Vector2f last_error;
+  // last error
+  Eigen::Vector2f last_error;
 
-        // anti-windup -> I_term cannot be more than max_I or less then -max_I
-        float max_I;
+  // anti-windup -> I_term cannot be more than max_I or less then -max_I
+  float max_I;
 
-		// last call of the run function
-        ros::Time last_send_time;
+  // last call of the run function
+  rclcpp::Time last_send_time_;
 };
