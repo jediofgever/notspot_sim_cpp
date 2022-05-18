@@ -32,13 +32,12 @@ int main(int argc, char * argv[])
   RobotController notspot(body_dimensions, leg_dimensions);
 
   auto dsd = robot_controller_node->create_subscription<sensor_msgs::msg::Joy>(
-    "notspot_joy/joy_ramped",
+    "joy",
     rclcpp::SensorDataQoS(),
     std::bind(&RobotController::joystick_command, &notspot, std::placeholders::_1));
 
-
-  auto dsa = robot_controller_node->create_subscription<sensor_msgs::msg::Joy>(
-    "imu",
+  auto dsa = robot_controller_node->create_subscription<sensor_msgs::msg::Imu>(
+    "imu/absolute",
     rclcpp::SensorDataQoS(),
     std::bind(&RobotController::imu_orientation, &notspot, std::placeholders::_1));
 
